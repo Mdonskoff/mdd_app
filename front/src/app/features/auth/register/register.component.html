@@ -1,0 +1,18 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <label for = "pseudo">Nom d'utilisateur</label>
+  <input type = "text" id="pseudo" required [formControl]="pseudo">
+
+  <label for = "email">Adresse e-mail</label>
+  <input type = "text" id="email" required [formControl]="email">
+
+  <label for = "password">Mot de passe</label>
+  <input type = "password" id="password" required [formControl]="password">
+
+  <ng-container *ngIf="isError">
+  <p [innerHTML]="errorMessage"></p>
+  </ng-container>
+
+  <button type = submit>S'inscrire</button>
+
+
+</form>
