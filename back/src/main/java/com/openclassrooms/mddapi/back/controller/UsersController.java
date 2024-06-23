@@ -5,7 +5,6 @@ import com.openclassrooms.mddapi.back.dto.UsersDto;
 import com.openclassrooms.mddapi.back.model.Users;
 import com.openclassrooms.mddapi.back.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

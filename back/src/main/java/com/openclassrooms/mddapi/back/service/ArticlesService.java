@@ -70,7 +70,7 @@ public class ArticlesService {
      * @param articles the article entity to convert.
      * @return the converted article DTO.
      */
-    public ArticlesDto convertArticlesToArticlesDto(Articles articles) {
+    private ArticlesDto convertArticlesToArticlesDto(Articles articles) {
         ArticlesDto articlesDto = new ArticlesDto();
         articlesDto.setId(articles.getId());
         articlesDto.setTitle(articles.getTitle());

@@ -43,7 +43,7 @@ public class CommentsService {
         return convertCommentsToCommentsDto(comment, article.get().getId());
     }
 
-    public CommentsDto convertCommentsToCommentsDto(Comments comments, int idArticle) {
+    private CommentsDto convertCommentsToCommentsDto(Comments comments, int idArticle) {
         CommentsDto commentsDto = new CommentsDto();
         commentsDto.setId(comments.getId());
         commentsDto.setDate(comments.getDate());

@@ -26,9 +26,7 @@ public class TopicService {
 
         // Convert each topic entity to a DTO and add to the list
         for (Topics topic : topicsList) {
-            TopicsDto newTopicsDto = new TopicsDto();
-            newTopicsDto.setId(topic.getId());
-            newTopicsDto.setLabel(topic.getLabel());
+            TopicsDto newTopicsDto = convertTopicsToTopicsDto(topic);
             topicsDtoList.add(newTopicsDto);
         }
         return topicsDtoList;
@@ -62,7 +60,7 @@ public class TopicService {
      * @param topic the topic entity to convert.
      * @return the converted topic DTO.
      */
-    public TopicsDto convertTopicsToTopicsDto(Topics topic) {
+    private TopicsDto convertTopicsToTopicsDto(Topics topic) {
         TopicsDto topicsDto = new TopicsDto();
         topicsDto.setId(topic.getId());
         topicsDto.setLabel(topic.getLabel());
@@ -75,7 +73,7 @@ public class TopicService {
      * @param topicsDto the topic DTO to convert.
      * @return the converted topic entity.
      */
-    public Topics convertTopicsDtoToTopics(TopicsDto topicsDto) {
+    private Topics convertTopicsDtoToTopics(TopicsDto topicsDto) {
         Topics topic = new Topics();
         topic.setId(topicsDto.getId());
         topic.setLabel(topicsDto.getLabel());
