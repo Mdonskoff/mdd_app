@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.back.controller;
 
+import com.openclassrooms.mddapi.back.dto.ArticlesDto;
 import com.openclassrooms.mddapi.back.dto.ResponseDto;
 import com.openclassrooms.mddapi.back.dto.UsersDto;
 import com.openclassrooms.mddapi.back.model.Users;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/user")
@@ -17,6 +20,21 @@ public class UsersController {
 
     @Autowired
     UsersService usersService;
+
+    @GetMapping("/articles")
+    ResponseEntity<ResponseDto> getArticlesByTopicsSubscriptions() {
+
+        ResponseDto responseDto = new ResponseDto();
+        List<ArticlesDto> articlesDtoList = usersService.getArticlesByTopicsSubscriptions();
+
+        if (articlesDtoList == null) {
+            responseDto.createResponse("error", "Article not found");
+            return ResponseEntity.ok(responseDto);
+        }
+        responseDto.createResponse("Articles", articlesDtoList);
+        return ResponseEntity.ok(responseDto);
+    }
+
 
     @PutMapping("/update")
     ResponseEntity<ResponseDto> updateUser(@RequestBody Users users) {

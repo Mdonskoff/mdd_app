@@ -145,18 +145,16 @@ public class ArticlesService {
     /**
      * Retrieves all articles for the given topic DTO.
      *
-     * @param topicsDto the topic DTO containing an array of topic IDs.
+     * @param topicsList the topic DTO containing an array of topic IDs.
      * @return a list of all article DTOs for the given topics sorted by date in descending order.
      */
-    public List<ArticlesDto> getAllArticlesByTopics(TopicsDto topicsDto) {
-        if (topicsDto.getIdTopicsTab() == null) {
+    public List<ArticlesDto> getAllArticlesByTopics(List<Topics> topicsList) {
+        if (topicsList.isEmpty()) {
             return null;
         }
         List<ArticlesDto> articlesDtoList = new ArrayList<>();
-        int size = topicsDto.getIdTopicsTab().length;
-        int[] idTopicsTab = topicsDto.getIdTopicsTab();
-        for (int i = 0; i < size; i++) {
-            articlesDtoList.addAll(getArticlesByIdTopic(idTopicsTab[i]));
+        for (Topics topics : topicsList) {
+            articlesDtoList.addAll(getArticlesByIdTopic(topics.getId()));
         }
         articlesDtoList.sort(Comparator.comparing(ArticlesDto::getDate).reversed());
         return articlesDtoList;

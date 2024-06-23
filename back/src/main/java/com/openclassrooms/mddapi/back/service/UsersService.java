@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.back.service;
 
+import com.openclassrooms.mddapi.back.dto.ArticlesDto;
 import com.openclassrooms.mddapi.back.dto.UsersDto;
 import com.openclassrooms.mddapi.back.model.Topics;
 import com.openclassrooms.mddapi.back.model.Users;
@@ -18,6 +19,13 @@ import java.util.Optional;
 @Slf4j
 @Service
 public class UsersService {
+
+    @Autowired
+    private ArticlesService articlesService;
+
+    @Autowired
+    private AuthService authService;
+
     @Autowired
     private TopicsRepository topicsRepository;
 
@@ -121,4 +129,11 @@ public class UsersService {
         return true;
     }
 
+    public List<ArticlesDto> getArticlesByTopicsSubscriptions() {
+
+        UsersDto usersDto = authService.getMyInfo();
+        List<ArticlesDto> articlesDtoList = articlesService.getAllArticlesByTopics(usersDto.getTopicsList());
+
+        return articlesDtoList;
+    }
 }

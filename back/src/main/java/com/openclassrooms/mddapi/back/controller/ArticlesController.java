@@ -60,18 +60,6 @@ public class ArticlesController {
 
     }
 
-    @GetMapping("/topics")
-    public ResponseEntity<ResponseDto> getAllArticlesByTopics(@RequestBody TopicsDto topicsDto) {
-        ResponseDto responseDto = new ResponseDto();
-        List<ArticlesDto> articlesDtoList = articlesService.getAllArticlesByTopics(topicsDto);
-        if (articlesDtoList == null) {
-            responseDto.createResponse("error", "Topics list is empty");
-            return ResponseEntity.ok(responseDto);
-        }
-        responseDto.createResponse("Articles", articlesDtoList);
-        return ResponseEntity.ok(responseDto);
-    }
-
     @DeleteMapping("/{idArticle}")
     public ResponseEntity<ResponseDto> deleteArticle(@PathVariable int idArticle) {
         ResponseDto responseDto = new ResponseDto();
