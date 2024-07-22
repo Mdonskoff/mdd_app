@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import {AuthModule} from "./features/auth/auth.module";
 import { IndexComponent } from './features/index/index.component';
+import {CoreModule} from "./core/core.module";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, IndexComponent],
@@ -15,7 +16,8 @@ import { IndexComponent } from './features/index/index.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    AuthModule,
+    CoreModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent],
