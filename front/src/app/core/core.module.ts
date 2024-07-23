@@ -13,8 +13,9 @@ import { HeaderComponent } from './components/header/header.component';
   imports: [
     CommonModule
   ],
-  exports: [
-    ButtonComponent
-  ]
+    exports: [
+        ButtonComponent,
+        HeaderComponent
+    ]
 })
 export class CoreModule { }

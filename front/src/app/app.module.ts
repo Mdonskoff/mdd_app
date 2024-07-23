@@ -5,13 +5,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {AuthModule} from "./features/auth/auth.module";
-import { IndexComponent } from './features/index/index.component';
+import { HomeComponent } from './features/home/home.component';
 import {CoreModule} from "./core/core.module";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/interceptor/auth.interceptor";
 
 @NgModule({
-  declarations: [AppComponent, IndexComponent],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

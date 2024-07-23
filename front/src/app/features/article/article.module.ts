@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ArticleRoutingModule } from './article-routing.module';
 import { IndexComponent } from './index/index.component';
+import {CoreModule} from "../../core/core.module";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { IndexComponent } from './index/index.component';
   ],
   imports: [
     CommonModule,
-    ArticleRoutingModule
+    ArticleRoutingModule,
+    CoreModule
   ]
 })
 export class ArticleModule { }
