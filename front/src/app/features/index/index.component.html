@@ -1,9 +1,37 @@
-<div class="center">
-  <img src="/assets/logo_p6.png" alt="logo" />
-  <h1>Welcome to MDD</h1>
+<!--
+<div class="index__main">
+  <div class="index__top">
+    <img src="../../../../assets/logo_p6.png" alt="logo mdd"/>
+  </div>
+  <div class="index__bottom">
+    <div class="index__button">
+      <app-button
+        label="Se connecter"
+        color="black"
+        (click)="login()"
+      ></app-button>
+      <app-button
+        label="S'inscrire"
+        color="black"
+        (click)="register()"
+      ></app-button>
+    </div>
+  </div>
+</div>
+-->
 
-  <div class="button">
-    <button type="button" class="btn btn-light" (click)="login()">Se connecter</button>
-    <button type="button" class="btn btn-light" (click)="register()">S'inscrire</button>
+<div class="index__main">
+  <div class="index__top">
+    <img src="../../../../assets/logo_p6.png" alt="logo mdd" />
+  </div>
+  <div class="index__bottom">
+    <div class="index__button">
+      <a routerLink="/login">
+        <app-button label="Se connecter" color="black" fontWeight="normal"></app-button>
+      </a>
+      <a routerLink="/register">
+      <app-button label="S'inscrire" color="black" fontWeight="normal"></app-button>
+      </a>
+    </div>
   </div>
 </div>

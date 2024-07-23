@@ -13,7 +13,8 @@ export class ButtonComponent implements OnInit {
   @Input() color: string = "black";
   @Input() border: string = "1px solid black";
   @Input() minWidth: string = "22rem";
-  @Input() minHeght: string = "3.8rem";
+  @Input() minHeight: string = "3.8rem";
+  @Input() fontWeight: string = "bold";
   @Output() buttonEvent = new EventEmitter<string>();
 
   constructor() { }
@@ -29,6 +30,7 @@ export class ButtonComponent implements OnInit {
       'border' : this.border,
       'minWidth' : '100%',
       'minHeight' : '100%',
+      'fontWeight': this.fontWeight
 
     }
   }

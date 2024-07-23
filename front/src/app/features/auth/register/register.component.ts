@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {isPasswordValid} from "../Validators/register.validators";
+import {isPasswordValid} from "../validators/register.validators";
 import {Register} from "../Interfaces/register.interface";
 import {RegisterService} from "../services/register.service";
 import {Router} from "@angular/router";
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         next : _ => {
           this.errorMessage = ""
           this.isError = false
-          console.log("Utilisateur créé, envoi à l'url login")
+          this.router.navigate(["/login"])
         },
         error: err => {
           this.errorMessage = "Erreur : L'utilisateur n'est pas créé"

@@ -8,6 +8,8 @@ import {RegisterService} from "./services/register.service";
 import {HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './login/login.component';
 import {CoreModule} from "../../core/core.module";
+import {SharedModule} from "../../shared/shared.module";
+import {LoginService} from "./services/login.service";
 
 @NgModule({
   declarations: [
@@ -18,10 +20,11 @@ import {CoreModule} from "../../core/core.module";
         CommonModule,
         CoreModule,
         AuthRoutingModule,
+        SharedModule,
         HttpClientModule,
         ReactiveFormsModule
 
     ],
-  providers : [RegisterService]
+  providers : [RegisterService, LoginService]
 })
 export class AuthModule { }
