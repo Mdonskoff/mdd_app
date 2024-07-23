@@ -4,13 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
 import {AuthModule} from "./features/auth/auth.module";
 import { IndexComponent } from './features/index/index.component';
 import {CoreModule} from "./core/core.module";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "./shared/interceptor/auth.interceptor";
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, IndexComponent],
+  declarations: [AppComponent, IndexComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,7 +20,9 @@ import {CoreModule} from "./core/core.module";
     CoreModule,
     AuthModule
   ],
-  providers: [],
+  providers: [
+    {provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
