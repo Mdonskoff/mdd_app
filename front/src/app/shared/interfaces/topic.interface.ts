@@ -1,4 +1,5 @@
 export interface Topic {
-  id?: string
-  label?: string
+  id: string
+  label: string
+  description: string
 }

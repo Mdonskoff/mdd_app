@@ -5,7 +5,10 @@ import { RouterModule, Routes } from '@angular/router';
 // to manage unauthenticated user to access private routes
 const routes: Routes = [
   { path: '', loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) }, //permet de charger AuthModule qu'au besoin.
-  { path: 'article', loadChildren: () => import('./features/article/article.module').then(m => m.ArticleModule) }
+  { path: 'article', loadChildren: () => import('./features/article/article.module').then(m => m.ArticleModule) },
+  { path: 'topic', loadChildren: () => import('./features/topic/topic.module').then(m => m.TopicModule) },
+  { path: '**', redirectTo: '/'}
+
 ];
 
 @NgModule({

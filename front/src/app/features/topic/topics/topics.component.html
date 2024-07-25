@@ -1,0 +1,27 @@
+<app-header route="topic"></app-header>
+<div class="main">
+  <div class="main__card">
+    <div class="card" *ngFor="let topic of topics">
+      <div class="card__title">
+        <p>{{ topic.label }}</p>
+      </div>
+
+      <div class="card__desc">
+        <p>
+          Description: <span *ngIf="topic.description"> {{ topic.description | slice : 0 : 100
+          }}{{ topic.description.length > 100 ? "..." : "" }} </span>
+        </p>
+      </div>
+      <div class="card__button">
+        <app-button
+          [label]="user.idTopic?.includes(topic.id) ? 'Abonné' : 'S\'abonner'"
+          (click)="onClick(topic.id, appButton)"
+          border="none"
+          bgColor="rgba(119, 99, 197, 1)"
+          color="white"
+          #appButton
+        ></app-button>
+      </div>
+    </div>
+  </div>
+</div>

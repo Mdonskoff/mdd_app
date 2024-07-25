@@ -64,6 +64,7 @@ public class TopicService {
         TopicsDto topicsDto = new TopicsDto();
         topicsDto.setId(topic.getId());
         topicsDto.setLabel(topic.getLabel());
+        topicsDto.setDescription(topic.getDescription());
         return topicsDto;
     }
 
@@ -77,6 +78,7 @@ public class TopicService {
         Topics topic = new Topics();
         topic.setId(topicsDto.getId());
         topic.setLabel(topicsDto.getLabel());
+        topic.setDescription(topicsDto.getDescription());
         return topic;
     }
 

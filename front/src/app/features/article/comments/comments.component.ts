@@ -23,7 +23,6 @@ export class CommentsComponent implements OnInit, OnDestroy {
     private userService : UserService
   ){}
 
-
   ngOnInit(): void {
     this.comments$ =  this.userService.getMe().pipe(
       tap(result => {

@@ -5,7 +5,7 @@ export interface User {
   email?: string
   pseudo?: string
   idComment?: string[]
-  idPost?: string[]
+  //idPost?: string[]
   idTopic?: string[]
   topicsList?: Topic[]
   created_at?: Date

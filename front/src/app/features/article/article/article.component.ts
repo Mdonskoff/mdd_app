@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ArticleItem} from "../interfaces/article-item.interface";
-import {TopicService} from "../../../shared/services/topic.service";
 import {ActivatedRoute} from "@angular/router";
 import {ArticleService} from "../services/article.service";
 import {mergeMap, Subscription, tap} from "rxjs";
@@ -16,7 +15,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   articleItem!: ArticleItem;
   articleItem$! : Subscription;
-  topic: Topic = {};
+  topic!: Topic;
 
   constructor(
     private route: ActivatedRoute,

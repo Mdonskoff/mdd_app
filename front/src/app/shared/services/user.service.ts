@@ -22,4 +22,11 @@ export class UserService {
     return this.http.get<{data: {me: User}}> (`${this.apiUrl}/auth/me`)
   }
 
+  subscribe(id: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/user/topic/${id}`, "");
+  }
+
+  unSubscribe(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/user/topic/${id}`);
+  }
 }
