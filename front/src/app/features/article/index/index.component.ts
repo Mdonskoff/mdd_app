@@ -16,7 +16,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   articleItem! : ArticleItem[];
   user!: User | null;
   sortArticleAsc : boolean = true;
-  arrow: string = "&#x2B73;"
+  arrow: string = "&#8595;"
 
   constructor(
     private articleService : ArticleService,
@@ -50,10 +50,10 @@ export class IndexComponent implements OnInit, OnDestroy {
     if (this.sortArticleAsc){
       this.sortArticleAsc = !this.sortArticleAsc;
       this.articleItem = this.articleItem.sort(this.sortArticleByCreatedDesc);
-      this.arrow = "&#x2B71;"
+      this.arrow = "&#8593;"
       return;
     }
-    this.arrow = "&#x2B73;"
+    this.arrow = "&#8595;"
     this.sortArticleAsc = !this.sortArticleAsc;
     this.articleItem = this.articleItem.sort(this.sortArticleByCreatedAsc);
   }

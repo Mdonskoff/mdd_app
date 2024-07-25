@@ -1,0 +1,33 @@
+<app-header></app-header>
+<div class="main" *ngIf="articleItem && topic">
+  <div class="header">
+    <div class="header__left">
+      <p><a routerLink="/article">&larr;</a></p>
+    </div>
+    <div class="header__title">
+      <p>{{ articleItem.title }}</p>
+    </div>
+  </div>
+  <div class="article">
+    <div class="article__header">
+      <div class="article__date">
+        <p>{{ articleItem.date | date : "dd/MM/Y H:mm" }}</p>
+      </div>
+      <div class="article__author">
+        <p>{{ articleItem.username }}</p>
+      </div>
+      <div class="article__theme">
+        <p>{{ topic.label }}</p>
+      </div>
+    </div>
+    <div class="article__contain">
+      <p>{{ articleItem.contents }}</p>
+    </div>
+    <div class="article__separate">
+      <hr />
+    </div>
+    <div class="comment">
+      <app-comment [idArticle]="articleItem.id!"></app-comment>
+    </div>
+  </div>
+</div>

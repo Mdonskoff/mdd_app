@@ -9,13 +9,15 @@ import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticleFormComponent } from './article-form/article-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/shared.module";
+import { ArticleComponent } from './article/article.component';
 
 
 @NgModule({
   declarations: [
     IndexComponent,
     ArticleListComponent,
-    ArticleFormComponent
+    ArticleFormComponent,
+    ArticleComponent
   ],
   imports: [
     CommonModule,

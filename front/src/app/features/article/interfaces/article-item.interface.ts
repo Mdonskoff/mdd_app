@@ -9,4 +9,6 @@ export interface ArticleItem {
   commentsList?: Comment[]
   date?: Date
 
+  labelTopic?: string;
+
 }
