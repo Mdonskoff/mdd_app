@@ -20,6 +20,7 @@ public class Articles {
 
     private Date date;
 
+    @Column(length = 1000)
     private String contents;
 
     @ManyToOne

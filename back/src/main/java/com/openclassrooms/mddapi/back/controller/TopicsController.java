@@ -2,7 +2,6 @@ package com.openclassrooms.mddapi.back.controller;
 
 import com.openclassrooms.mddapi.back.dto.ResponseDto;
 import com.openclassrooms.mddapi.back.dto.TopicsDto;
-import com.openclassrooms.mddapi.back.model.Topics;
 import com.openclassrooms.mddapi.back.service.TopicService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,1 +1,28 @@
-<app-header></app-header>
+<app-header route = "article"></app-header>
+<div class="article__main">
+  <div class="article__option">
+    <div class="option__left">
+      <div class="createArticleButton">
+        <app-button
+          label="Créer un article"
+          color="white"
+          bgColor="rgba(119, 99, 197, 1)"
+          border="none"
+          (buttonEvent)="create($event)"
+        ></app-button>
+      </div>
+    </div>
+    <div class="option__right">
+      <p (click)="sortArticle()">Trier par <span [innerHTML]="arrow"></span></p>
+    </div>
+  </div>
+  <div class="article__contain">
+    <div class="article__card">
+      <app-article-list
+        *ngFor="let article of articleItem"
+        [articleItem]="article"
+        class="article__list">
+      </app-article-list>
+    </div>
+  </div>
+</div>

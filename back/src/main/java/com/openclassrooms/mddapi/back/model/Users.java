@@ -1,7 +1,5 @@
 package com.openclassrooms.mddapi.back.model;
 
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

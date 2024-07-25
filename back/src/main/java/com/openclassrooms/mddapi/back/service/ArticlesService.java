@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.back.service;
 
 import com.openclassrooms.mddapi.back.dto.ArticlesDto;
-import com.openclassrooms.mddapi.back.dto.TopicsDto;
 import com.openclassrooms.mddapi.back.model.Articles;
 import com.openclassrooms.mddapi.back.model.Topics;
 import com.openclassrooms.mddapi.back.model.Users;
@@ -65,7 +64,7 @@ public class ArticlesService {
     }
 
     /**
-     * Converts an article entity to a data transfer object.
+     * Converts an article entity to a DTO.
      *
      * @param articles the article entity to convert.
      * @return the converted article DTO.

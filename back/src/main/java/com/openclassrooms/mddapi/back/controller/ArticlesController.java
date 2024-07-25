@@ -2,7 +2,6 @@ package com.openclassrooms.mddapi.back.controller;
 
 import com.openclassrooms.mddapi.back.dto.ArticlesDto;
 import com.openclassrooms.mddapi.back.dto.ResponseDto;
-import com.openclassrooms.mddapi.back.dto.TopicsDto;
 import com.openclassrooms.mddapi.back.service.ArticlesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

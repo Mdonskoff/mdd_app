@@ -129,6 +129,10 @@ public class UsersService {
         return true;
     }
 
+    /**
+     * Get articles from topics subscribed by the user.
+     * @return
+     */
     public List<ArticlesDto> getArticlesByTopicsSubscriptions() {
 
         UsersDto usersDto = authService.getMyInfo();

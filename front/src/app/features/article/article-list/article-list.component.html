@@ -1,0 +1,17 @@
+<div class="card" (click)="onClick()">
+  <div class="card__header">
+    <div class="card__title">{{ articleItem!.title }}</div>
+    <div class="card__subtitle">
+      <span class="subtitle__date">{{
+        articleItem!.date | date : "dd/MM/Y H:mm"
+        }}</span>
+      <span class="subtitle__author">{{ articleItem!.username }}</span>
+    </div>
+  </div>
+  <div class="card__contain">
+    <p>
+      {{ articleItem!.contents | slice : 0 : 100}}
+      {{ articleItem!.contents!.length > 100 ? "..." : "" }}
+    </p>
+  </div>
+</div>
