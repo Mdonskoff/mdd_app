@@ -10,12 +10,12 @@ export class ArticleService {
 
   private apiUrl = 'http://localhost:8080/api';
 
-  create(PostItem: ArticleItem): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/articles`, PostItem);
+  create(articleItem: ArticleItem): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/articles`, articleItem);
   }
 
-  getArticleById(idArticle: string): Observable<ArticleItem>{
-    return this.http.get<ArticleItem>(`${this.apiUrl}/articles/${idArticle}`);
+  getArticleById(idArticle: string): Observable<{data :{article :ArticleItem}}>{
+    return this.http.get<{data :{article :ArticleItem}}>(`${this.apiUrl}/articles/${idArticle}`);
   }
 
 }

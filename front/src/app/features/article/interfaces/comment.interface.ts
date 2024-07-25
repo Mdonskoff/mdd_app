@@ -3,4 +3,5 @@ export interface Comment {
   comments? : string;
   idArticle? : string;
   date?: Date
+  pseudo?: string;
 }

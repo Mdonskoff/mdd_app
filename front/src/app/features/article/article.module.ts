@@ -10,6 +10,8 @@ import { ArticleFormComponent } from './article-form/article-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/shared.module";
 import { ArticleComponent } from './article/article.component';
+import { CommentsComponent } from './comments/comments.component';
+import {CommentService} from "./services/comment.service";
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { ArticleComponent } from './article/article.component';
     IndexComponent,
     ArticleListComponent,
     ArticleFormComponent,
-    ArticleComponent
+    ArticleComponent,
+    CommentsComponent
   ],
   imports: [
     CommonModule,
@@ -26,6 +29,6 @@ import { ArticleComponent } from './article/article.component';
     ReactiveFormsModule,
     SharedModule
   ],
-  providers: [ArticleService]
+  providers: [ArticleService, CommentService]
 })
 export class ArticleModule { }

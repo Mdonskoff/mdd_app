@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ArticleItem} from "../../features/article/interfaces/article-item.interface";
+import {User} from "../interfaces/user.interface";
 
 
 @Injectable({
@@ -9,13 +10,16 @@ import {ArticleItem} from "../../features/article/interfaces/article-item.interf
 })
 export class UserService {
 
-  private apiUrl = 'http://localhost:8080/api/user';
+  private apiUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient){
   }
 
   getArticles(): Observable<{data: {Articles: ArticleItem[]}}> {
-    return this.http.get<{data: {Articles: ArticleItem[]}}> (`${this.apiUrl}/articles`)
+    return this.http.get<{data: {Articles: ArticleItem[]}}> (`${this.apiUrl}/user/articles`)
+  }
+  getMe(): Observable<{data: {me: User}}> {
+    return this.http.get<{data: {me: User}}> (`${this.apiUrl}/auth/me`)
   }
 
 }

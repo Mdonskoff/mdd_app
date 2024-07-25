@@ -1,0 +1,28 @@
+<div class="main">
+  <p>Commentaires</p>
+  <div class="comments">
+    <div class="comments__info" *ngFor="let comment of comments">
+      <div class="comments__user">
+        <p>{{ comment.pseudo }}</p>
+      </div>
+      <div class="comments__show">{{ comment.comments }}</div>
+    </div>
+    <div class="comments__post">
+      <div class="comments__contain">
+        <textarea
+          name=""
+          id="commentContain"
+          placeholder="Écrivez ici votre commentaire"
+          #commentContain
+        ></textarea>
+      </div>
+      <div class="comments__send">
+        <img
+          src="../../../../assets/send.png"
+          alt="bouton envoyer"
+          (click)="onClick()"
+        />
+      </div>
+    </div>
+  </div>
+</div>

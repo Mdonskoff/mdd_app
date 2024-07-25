@@ -25,6 +25,9 @@ public class ArticlesService {
     @Autowired
     TopicsRepository topicsRepository;
 
+    @Autowired
+    CommentsService commentsService;
+
     /**
      * Creates a new article.
      *
@@ -78,7 +81,8 @@ public class ArticlesService {
         articlesDto.setIdTopic(articles.getTopics().getId());
         articlesDto.setLabelTopic(articles.getTopics().getLabel());
         articlesDto.setDate(articles.getDate());
-        articlesDto.setCommentsList(articles.getCommentsList());
+        articlesDto.setCommentsList(commentsService.convertListCommentsToListCommentsDto(articles.getCommentsList(),
+                articles.getId()));
 
         return articlesDto;
     }

@@ -30,7 +30,7 @@ public class ArticlesDto {
 
     private String username;
 
-    private List<Comments> commentsList;
+    private List<CommentsDto> commentsList;
 
 
 }

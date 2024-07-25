@@ -16,12 +16,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   articleItem!: ArticleItem;
   articleItem$! : Subscription;
-  topic!: Topic;
+  topic: Topic = {};
 
   constructor(
     private route: ActivatedRoute,
     private articleService : ArticleService,
-    private topicService: TopicService
   ){}
 
 
@@ -30,10 +29,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
       mergeMap(param => {
         return this.articleService.getArticleById(param['id']);
       }),
-      tap(article => {
-        this.articleItem = article;
-        this.topic.id = article.idTopic!
-        this.topic.label = article.labelTopic!
+      tap(result => {
+        this.articleItem = result.data.article;
+        this.topic.id = result.data.article.idTopic!
+        this.topic.label = result.data.article.labelTopic!
       })
     ).subscribe();
 
@@ -41,6 +40,5 @@ export class ArticleComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.articleItem$.unsubscribe();
   }
-
 
 }

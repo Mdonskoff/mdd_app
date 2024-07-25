@@ -15,4 +15,6 @@ public class CommentsDto {
 
     private int idArticle;
 
+    private String pseudo;
+
 }

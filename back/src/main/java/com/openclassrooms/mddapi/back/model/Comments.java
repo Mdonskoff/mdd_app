@@ -15,4 +15,7 @@ public class Comments {
     private String comments;
 
     private Date date;
+
+    @ManyToOne
+    private Users users;
 }
