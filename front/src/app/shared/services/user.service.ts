@@ -29,4 +29,11 @@ export class UserService {
   unSubscribe(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/user/topic/${id}`);
   }
+
+  updateMe(pseudo: string, email: string, password: string): Observable<{data: {token : string}}>{
+    const user = {
+      pseudo, email, password
+    };
+    return this.http.put<{data: {token : string}}>(`${this.apiUrl}/user/update`, user);
+  }
 }

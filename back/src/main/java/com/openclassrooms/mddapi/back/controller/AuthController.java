@@ -50,4 +50,8 @@ public class AuthController {
         responseDto.createResponse("success", false);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseDto);
     }
+    @GetMapping("/logout")
+    public void logout(){
+        authService.logout();
+    }
 }

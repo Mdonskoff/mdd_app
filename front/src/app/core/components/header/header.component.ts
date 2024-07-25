@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       this.topic.nativeElement.classList.add('linkStyle');
     }
     else if(this.route === 'profile') {
-      this.srcImg = `../../../../assets/active_profile.png`;
+      this.srcImg = `../../../../assets/active_account.png`;
     }
     this.cdr.detectChanges();
   }

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {isPasswordValid} from "../validators/register.validators";
+import {isPasswordValid} from "../../../shared/validators/password.validators";
 import {Register} from "../Interfaces/register.interface";
 import {RegisterService} from "../services/register.service";
 import {Router} from "@angular/router";
@@ -88,7 +88,4 @@ export class RegisterComponent implements OnInit, OnDestroy {
         - un caractère spécial (!@#$%^&*-).";
     }
   }
-
-
-
 }

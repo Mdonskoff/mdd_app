@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: '', loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) }, //permet de charger AuthModule qu'au besoin.
   { path: 'article', loadChildren: () => import('./features/article/article.module').then(m => m.ArticleModule) },
   { path: 'topic', loadChildren: () => import('./features/topic/topic.module').then(m => m.TopicModule) },
+  { path: 'profile', loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule) },
   { path: '**', redirectTo: '/'}
 
 ];

@@ -107,4 +107,8 @@ public class AuthService {
         return usersDto;
     }
 
+    public void logout() {
+        SecurityContextHolder.clearContext();
+    }
+
 }
