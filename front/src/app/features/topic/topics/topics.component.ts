@@ -5,6 +5,9 @@ import {UserService} from "../../../shared/services/user.service";
 import {Topic} from "../../../shared/interfaces/topic.interface";
 import {mergeMap, Subscription} from "rxjs";
 import {ButtonComponent} from "../../../core/components/button/button.component";
+import {
+  logExperimentalWarnings
+} from "@angular-devkit/build-angular/src/builders/browser-esbuild/experimental-warnings";
 
 @Component({
   selector: 'app-topics',
@@ -51,7 +54,10 @@ export class TopicsComponent implements OnInit, OnDestroy {
       next: (result: {data: {me: User}}) => {
         this.user = result.data.me
         this.user.idTopic = this.user.topicsList!.map(topic => topic.id)
-      }
+      },
+      error:(err => {
+        console.log(err)
+      })
     });
   }
 

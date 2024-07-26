@@ -46,16 +46,17 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   sortArticle(): void{ //fonction sort de JS
-
-    if (this.sortArticleAsc){
+    if (this.articleItem && this.articleItem.length > 0) {
+      if (this.sortArticleAsc){
+        this.sortArticleAsc = !this.sortArticleAsc;
+        this.articleItem = this.articleItem.sort(this.sortArticleByCreatedDesc);
+        this.arrow = "&#8593;"
+        return;
+      }
+      this.arrow = "&#8595;"
       this.sortArticleAsc = !this.sortArticleAsc;
-      this.articleItem = this.articleItem.sort(this.sortArticleByCreatedDesc);
-      this.arrow = "&#8593;"
-      return;
+      this.articleItem = this.articleItem.sort(this.sortArticleByCreatedAsc);
     }
-    this.arrow = "&#8595;"
-    this.sortArticleAsc = !this.sortArticleAsc;
-    this.articleItem = this.articleItem.sort(this.sortArticleByCreatedAsc);
   }
 
   sortArticleByCreatedAsc(articleItem : ArticleItem, newArticleItem : ArticleItem): number {

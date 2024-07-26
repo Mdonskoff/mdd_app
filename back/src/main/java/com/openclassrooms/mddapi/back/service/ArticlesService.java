@@ -2,11 +2,13 @@ package com.openclassrooms.mddapi.back.service;
 
 import com.openclassrooms.mddapi.back.dto.ArticlesDto;
 import com.openclassrooms.mddapi.back.model.Articles;
+import com.openclassrooms.mddapi.back.model.Comments;
 import com.openclassrooms.mddapi.back.model.Topics;
 import com.openclassrooms.mddapi.back.model.Users;
 import com.openclassrooms.mddapi.back.repository.ArticlesRepository;
 import com.openclassrooms.mddapi.back.repository.TopicsRepository;
 import com.openclassrooms.mddapi.back.repository.UsersRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
+@Slf4j
 public class ArticlesService {
 
     @Autowired
@@ -50,6 +53,7 @@ public class ArticlesService {
             Articles article = new Articles();
             article.setTitle(articleDto.getTitle());
             article.setContents(articleDto.getContents());
+            article.setCommentsList(new ArrayList<Comments>());
             article.setTopics(topic);
             article.setDate(new Date());
 

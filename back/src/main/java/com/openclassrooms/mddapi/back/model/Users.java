@@ -29,7 +29,11 @@ public class Users implements UserDetails {
     private Date updated_at;
 
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name="topics_user",
+    joinColumns = @JoinColumn(name = "idUser"),
+    inverseJoinColumns = @JoinColumn(name = "idTopic"),
+    uniqueConstraints = @UniqueConstraint(columnNames = {"idUser", "idTopic"}))
     private List<Topics> topicsList;
 
     @PrePersist //avant la sauvegarde dans la BDD pendant la création

@@ -4,6 +4,8 @@ package com.openclassrooms.mddapi.back.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 
 @Entity
 @Data
@@ -16,6 +18,7 @@ public class Topics {
 
     @Column(length = 500)
     private String description;
+
 
 
 }

@@ -15,7 +15,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   articleItem!: ArticleItem;
   articleItem$! : Subscription;
-  topic!: Topic;
+  topic: Topic = {id : "0", description : "", label : ""};
 
   constructor(
     private route: ActivatedRoute,
@@ -26,14 +26,23 @@ export class ArticleComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.articleItem$ = this.route.queryParams.pipe(
       mergeMap(param => {
+        console.log(param['id'])
         return this.articleService.getArticleById(param['id']);
       }),
       tap(result => {
         this.articleItem = result.data.article;
-        this.topic.id = result.data.article.idTopic!
+        console.log(this.topic)
+        console.log(result)
+        this.topic.id = result.data.article.idTopic!.toString()
         this.topic.label = result.data.article.labelTopic!
       })
-    ).subscribe();
+    ).subscribe(
+      {
+        error: err => {
+          console.log(err)
+        }
+      }
+    );
 
   }
   ngOnDestroy(): void {

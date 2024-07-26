@@ -6,62 +6,48 @@ import {AuthService} from "../../../shared/services/auth.service";
 import {Router} from "@angular/router";
 import {mergeMap, Subscription, tap} from "rxjs";
 import {Topic} from "../../../shared/interfaces/topic.interface";
-import {isPasswordValid} from "../../../shared/validators/password.validators";
 
 @Component({
-  selector: 'app-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class AccountComponent implements OnInit, OnDestroy {
-
+export class ProfileComponent implements OnInit, OnDestroy {
   auth$!: Subscription;
   user$!: Subscription;
   unSubTopics$!: Subscription;
   topics!: Topic[];
   user!: User;
-  accountFormGroup = new FormGroup({});
+  profileForm: FormGroup = new FormGroup({});
   pseudo! : FormControl;
-  email! : FormControl;
   password! : FormControl;
-  confirmPassword! : FormControl;
   errorMessage: string = "";
-
   isError: boolean = false;
-  successMsg: string = "";
-
-  accountForm: FormGroup = new FormGroup({});
+  successMessage: string = "";
 
   constructor(
     private authService: AuthService,
     private userService : UserService,
     private router: Router,
     private fb: FormBuilder
-  ){}
+  ){
+    this.profileForm = this.fb.group({
+      pseudo: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     this.user$ = this.userService.getMe().pipe(
       tap(result => {
         this.user = result.data.me;
-        /*this.pseudo = new FormControl(this.user.pseudo, Validators.required);
-        this.email = new FormControl(this.user.email, [Validators.required, Validators.email]);
-        this.password = new FormControl("");
-        //this.password = new FormControl(this.accountFormGroup, [Validators.required, Validators.minLength(8),
-          //isPasswordValid(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$/)])
-        this.confirmPassword = new FormControl("");
-        this.accountFormGroup.addControl("pseudo", this.pseudo);
-        this.accountFormGroup.addControl("email", this.email);
-        this.accountFormGroup.addControl("password", this.password);
-        this.accountFormGroup.addControl("confirmPassword", this.confirmPassword);
-
-         */
         this.topics = this.user.topicsList!
-        this.accountForm = new FormGroup ({
-          pseudo: new FormControl(""),
-          email: new FormControl(""),
-          password: new FormControl(""),
-          confirmPassword: new FormControl("")
-        })
+        this.profileForm.patchValue({
+          pseudo: this.user.pseudo,
+          email: this.user.email
+        });
       })
     ).subscribe();
   }
@@ -82,15 +68,22 @@ export class AccountComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    if (this.accountFormGroup.status === "INVALID") {
+    if (this.profileForm.status === "INVALID") {
       this.showError()
       return;
     }
-
+    if (this.profileForm.controls['password'].value !== this.profileForm.controls['confirmPassword'].value) {
+      this.showError('samePassword')
+      return;
+    }
+    if (!this.isPasswordValid(this.profileForm.controls['password'].value)) {
+      this.showError('password')
+      return
+    }
     this.userService.updateMe(
-      this.pseudo.value,
-      this.email.value,
-      this.password.value
+      this.profileForm.controls['pseudo'].value,
+      this.profileForm.controls['email'].value,
+      this.profileForm.controls['password'].value
     ).pipe(
       mergeMap((result) => {
         this.authService.setToken(result.data.token);
@@ -100,41 +93,52 @@ export class AccountComponent implements OnInit, OnDestroy {
       {
         next : result => { this.user = result.data.me;
           this.showSuccessMsg();
+          this.profileForm.patchValue({
+            password: "",
+            confirmPassword: ""
+          });
         },
-        error : err => this.showErrorMsg(err)
+        error : err => {
+          this.showErrorMsg(err.error.data.error)
+        }
       }
     )
   }
 
-  showError(): void {
+  isPasswordValid(password : string) : boolean{
+    let regex = new RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$/)
+    return regex.test(password);
+  }
+
+  showError(error: string = ""): void {
     this.isError = true
     this.errorMessage = "Erreur : "
-    const controls = this.accountFormGroup.controls
-    /*
-    if(controls["pseudo"].errors) {
+    const controls = this.profileForm.controls
+
+    if(controls["pseudo"].errors)
       this.errorMessage += "Veuillez entrer un pseudo"
-    }
-    else if(controls["email"].errors) {
+    else if(controls["email"].errors)
       this.errorMessage += "Veuillez entrer un email"
-    }
-    else if(controls['password'].errors) {
+    else if(error == 'password')
       this.errorMessage += "Le mot de passe doit contenir : <br> \
         - 8 caractères minimum <br>\
         - une minuscule <br>\
         - une majuscule <br>\
         - un chiffre <br> \
         - un caractère spécial (!@#$%^&*-).";
-    }
-     */
+    else if(error == 'samePassword')
+      this.errorMessage += "Les mots de passe doivent être identiques";
+    else
+      this.errorMessage += "Vérifiez les champs";
   }
 
   showSuccessMsg(): void {
-    this.successMsg = "Utilisateur mis à jour";
+    this.successMessage = "Utilisateur mis à jour";
     this.errorMessage = "";
   }
-  showErrorMsg(err: { error: { message: string; }; }) {
-    this.successMsg = "";
-    this.errorMessage = err.error.message;
+  showErrorMsg(message: string) {
+    this.successMessage = "";
+    this.errorMessage = message;
   }
 
   unSubscribe(id : string) : void {
@@ -149,5 +153,4 @@ export class AccountComponent implements OnInit, OnDestroy {
   removeTopic(id : string) {
     this.topics = this.topics.filter(topic => topic.id !== id);
   }
-
 }

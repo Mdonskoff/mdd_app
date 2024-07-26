@@ -90,7 +90,6 @@ public class UsersService {
         List<Topics> topicsList = user.getTopicsList();
         if (topicsList == null) {
             topicsList = new ArrayList<>();
-
         }
         if (topicsList.contains(topics.get())) {
             return false; //car existe déjà
