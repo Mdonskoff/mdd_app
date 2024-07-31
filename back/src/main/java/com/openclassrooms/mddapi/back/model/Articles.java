@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.back.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 

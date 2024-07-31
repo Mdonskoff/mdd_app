@@ -8,8 +8,6 @@ public class TopicsDto {
 
     private String label;
 
-    private int [] idTopicsTab;
-
     private String description;
 
 }

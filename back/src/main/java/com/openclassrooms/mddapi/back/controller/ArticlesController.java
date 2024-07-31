@@ -3,6 +3,12 @@ package com.openclassrooms.mddapi.back.controller;
 import com.openclassrooms.mddapi.back.dto.ArticlesDto;
 import com.openclassrooms.mddapi.back.dto.ResponseDto;
 import com.openclassrooms.mddapi.back.service.ArticlesService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/articles")
 public class ArticlesController {
@@ -17,6 +24,13 @@ public class ArticlesController {
     @Autowired
     private ArticlesService articlesService;
 
+    @Operation(
+            summary = "Create an article",
+            description = "Returns an article object")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ArticlesDto.class)))
+    })
     @PostMapping("")
     private ResponseEntity<ResponseDto> createArticle(@RequestBody ArticlesDto articleDto) {
         ArticlesDto article = articlesService.createArticle(articleDto);
@@ -30,6 +44,13 @@ public class ArticlesController {
 
     }
 
+    @Operation(
+            summary = "Get all articles",
+            description = "Return all articles")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+    })
     @GetMapping("")
     private ResponseEntity<ResponseDto> getAllArticles() {
         List<ArticlesDto> articles = articlesService.getAllArticles();
@@ -38,6 +59,13 @@ public class ArticlesController {
         return ResponseEntity.ok(responseDto);
     }
 
+    @Operation(
+            summary = "Get an article by Id",
+            description = "Returns an article, the url contains the identifier")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+    })
     @GetMapping("/{idArticle}")
     private ResponseEntity<ResponseDto> getArticle(@PathVariable int idArticle) {
         ArticlesDto article = articlesService.getArticleById(idArticle);
@@ -46,6 +74,13 @@ public class ArticlesController {
         return ResponseEntity.ok(responseDto);
     }
 
+    @Operation(
+            summary = "Get all articles by topic id",
+            description = "Returns all articles that belong to a topic by passing the topic's iD in the url")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+    })
     @GetMapping("/topic/{idTopic}")
     private ResponseEntity<ResponseDto> getArticlesByTopicId(@PathVariable int idTopic) {
         List<ArticlesDto> articles = articlesService.getArticlesByIdTopic(idTopic);
@@ -58,6 +93,7 @@ public class ArticlesController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDto);
 
     }
+
 
     @DeleteMapping("/{idArticle}")
     public ResponseEntity<ResponseDto> deleteArticle(@PathVariable int idArticle) {

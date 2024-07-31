@@ -63,8 +63,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   logout(): void{
-    this.auth$ = this.authService.logout().subscribe();
-    this.router.navigate(['/']);
+    this.auth$ = this.authService.logout().subscribe({
+      next: _ => {
+        this.authService.removeToken()
+        this.router.navigate(['/']);
+      }
+    });
   }
 
   onSubmit(): void {

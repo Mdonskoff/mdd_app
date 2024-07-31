@@ -14,6 +14,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig implements WebMvcConfigurer {
@@ -31,7 +32,7 @@ public class SecurityConfig implements WebMvcConfigurer {
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
-                        .requestMatchers(AUTH_WHITELIST).permitAll()
+                        .requestMatchers(HttpMethod.GET, AUTH_WHITELIST).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement( session -> session

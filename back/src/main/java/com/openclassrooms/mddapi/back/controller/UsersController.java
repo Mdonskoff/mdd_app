@@ -5,6 +5,11 @@ import com.openclassrooms.mddapi.back.dto.ResponseDto;
 import com.openclassrooms.mddapi.back.dto.UsersDto;
 import com.openclassrooms.mddapi.back.model.Users;
 import com.openclassrooms.mddapi.back.service.UsersService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +26,13 @@ public class UsersController {
     @Autowired
     UsersService usersService;
 
+    @Operation(
+            summary = "Get all articles by topics subscriptions",
+            description = "Returns all articles subscribed by the user")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+    })
     @GetMapping("/articles")
     ResponseEntity<ResponseDto> getArticlesByTopicsSubscriptions() {
 
@@ -36,6 +48,13 @@ public class UsersController {
     }
 
 
+    @Operation(
+            summary = "Update the information of the user who is logged in ",
+            description = "Returns a new token to identify the user")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+    })
     @PutMapping("/update")
     ResponseEntity<ResponseDto> updateUser(@RequestBody Users users) {
 
@@ -53,6 +72,13 @@ public class UsersController {
         return ResponseEntity.ok().body(responseDto);
     }
 
+    @Operation(
+            summary = "Update the topic subscription about user who is logged in",
+            description = "Send id topic in the URL for update the user subscription")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+    })
     @PostMapping("/topic/{idTopic}")
     ResponseEntity<ResponseDto> topicSubscription(@PathVariable int idTopic) {
         ResponseDto responseDto = new ResponseDto();
@@ -60,6 +86,13 @@ public class UsersController {
         return ResponseEntity.ok(responseDto);
     }
 
+    @Operation(
+            summary = "Unsbuscribe a topic by the user",
+            description = "Send id topic in the URL for update the user subscription")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+    })
     @DeleteMapping("/topic/{idTopic}")
     ResponseEntity<ResponseDto> topicUnsubscription(@PathVariable int idTopic) {
         ResponseDto responseDto = new ResponseDto();

@@ -5,9 +5,6 @@ import {UserService} from "../../../shared/services/user.service";
 import {Topic} from "../../../shared/interfaces/topic.interface";
 import {mergeMap, Subscription} from "rxjs";
 import {ButtonComponent} from "../../../core/components/button/button.component";
-import {
-  logExperimentalWarnings
-} from "@angular-devkit/build-angular/src/builders/browser-esbuild/experimental-warnings";
 
 @Component({
   selector: 'app-topics',

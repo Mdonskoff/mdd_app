@@ -11,14 +11,6 @@ export class AuthService {
 
   constructor(private http : HttpClient){}
 
-  getIsAuthenticated() : boolean{
-    return this.isAuthenticate;
-  }
-
-  setIsAuthenticated(isAuthenticated: boolean): void{
-    this.isAuthenticate = isAuthenticated;
-  }
-
   getToken(): string|null{
     return localStorage.getItem('jwt');
   }
@@ -32,9 +24,11 @@ export class AuthService {
     return token !== null ? true : false;
   }
 
+  removeToken(): void {
+    localStorage.removeItem('jwt');
+  }
 
   logout(): Observable<void> {
-    localStorage.removeItem('jwt');
     return this.http.get<void>(`${this.apiUrl}/logout`);
   }
 

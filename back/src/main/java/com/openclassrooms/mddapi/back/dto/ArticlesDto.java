@@ -1,9 +1,5 @@
 package com.openclassrooms.mddapi.back.dto;
 
-import com.openclassrooms.mddapi.back.model.Comments;
-import com.openclassrooms.mddapi.back.model.Topics;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

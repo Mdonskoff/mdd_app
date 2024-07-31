@@ -4,8 +4,6 @@ package com.openclassrooms.mddapi.back.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
-
 
 @Entity
 @Data
