@@ -1,25 +1,42 @@
-# P6-Full-Stack-reseau-dev
+# MDD App (Monde de dev)
+
+## Context
+Create an MVP application that allows you to :
+
+- Register and login
+- Subscribe or unsubscribe to a topic
+- Create and open articles
+- A personal feed view
+- Comment an article
+- Modify your profile info
 
 ## Front
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13.
 
 Don't forget to install your node_modules before starting (`npm install`).
 
-### Development server
+## Back
+This project is developed in Java version 17.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Don't forget to download maven dependencies.
 
-### Build
+### Development front server
+Run `ng serve` for a dev server. Navigate to http://localhost:4200/. The application will automatically reload if you change any of the source files.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Development back server
+Run `BackApplication` with your IDE command or maven command. Go to http://localhost:8080/documentation for API documentation. 
 
-### Where to start
+Please note that the application must be installed and running to access the documentation.
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+## Where to start
+Clone this repository with git clone command and follow the steps in the back folder /back/README.md and the front folder /front/README.md
+Install the back end first, then the front end.
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+### WARNING
+The application is configured to update the database.
+If you want to delete once shut down, you have to change this line :
+`spring.jpa.hibernate.ddl-auto=update` to `spring.jpa.hibernate.ddl-auto=create-drop`
+in the /back/.../application.properties file.
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get ride of it.
-
-Good luck!
+## Author
+Marushka LABORDE-DONSKOFF
