@@ -27,10 +27,12 @@ public class CommentsController {
 
     @Operation(
             summary = "Post a comment",
-            description = "Post a comment under an article. You must pass an object containing the comment and the post id")
+            description = "Post a comment under an article. You must provide an object containing the comment text and the post id")
     @ApiResponses({
-            @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = CommentsDto.class)))
+            @ApiResponse(responseCode = "200", description = "Comment successfully posted",
+                    content = {@Content(schema = @Schema(implementation = ResponseDto.class), mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", description = "Comment not created",
+                    content = {@Content(schema = @Schema(implementation = ResponseDto.class), mediaType = "application/json")})
     })
     @PostMapping("")
     private ResponseEntity<ResponseDto> createComment(@RequestBody CommentsDto commentDto) {

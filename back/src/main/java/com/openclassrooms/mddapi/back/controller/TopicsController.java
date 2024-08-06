@@ -24,10 +24,12 @@ public class TopicsController {
 
     @Operation(
             summary = "Get all topics",
-            description = "Returns an array of topics")
+            description = "Returns an array of all topics")
     @ApiResponses({
-            @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved topics",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDto.class))}),
+            @ApiResponse(responseCode = "400", description = "Error retrieving topics",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Exception.class))})
     })
     @GetMapping("")
     public ResponseEntity<ResponseDto> getAllTopics() {
@@ -38,10 +40,12 @@ public class TopicsController {
 
     @Operation(
             summary = "Create a topic",
-            description = "Create a topic and return it")
+            description = "Creates a new topic and returns the created topic object")
     @ApiResponses({
-            @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+            @ApiResponse(responseCode = "200", description = "Successfully created topic",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDto.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid input data",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Exception.class))})
     })
     @PostMapping("")
     public ResponseEntity<ResponseDto> createTopic(@RequestBody TopicsDto topic) {

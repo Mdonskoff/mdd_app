@@ -23,11 +23,11 @@ public class AuthController {
 
     @Operation(
             summary = "Sign up to the app and return a token",
-            description = "Send a Register object (name, email, password) to sign up")
+            description = "Send a Register object (username, email, password) to sign up")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = RegisterDto.class),
+            @ApiResponse(responseCode = "200", description = "Successfully registered", content = {@Content(schema = @Schema(implementation = RegisterDto.class),
                     mediaType = "application/json")}),
-            @ApiResponse(responseCode = "400")
+            @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
     @PostMapping("/register")
     public ResponseEntity<ResponseDto> register(@RequestBody RegisterDto registerDto) {
@@ -43,11 +43,14 @@ public class AuthController {
 
     @Operation(
             summary = "Login to the app and get a token",
-            description = "Get a token access by sending a Login object to login ")
+            description = "Obtain an access token by sending a Login object (email and password) to log in")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = LogInDto.class),
-                    mediaType = "application/json")}),
-            @ApiResponse(responseCode = "400")
+            @ApiResponse(responseCode = "200", description = "Successfully logged in",
+                    content = {@Content(schema = @Schema(implementation = ResponseDto.class), mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", description = "Invalid input data",
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "403", description = "Login not valid",
+                    content = {@Content(mediaType = "application/json")})
     })
     @PostMapping("/login")
     public ResponseEntity<ResponseDto> LogIn(@RequestBody LogInDto logInDto) {
@@ -63,10 +66,12 @@ public class AuthController {
 
     @Operation(
             summary = "Get user info",
-            description = "Get informations about the logged user account")
+            description = "Get information about the logged-in user account")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = {@Content(mediaType = "application/json")}),
-            @ApiResponse(responseCode = "401")
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = ResponseDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "401", description = "Unauthorized - user not logged in",
+                    content = {@Content(mediaType = "application/json")})
     })
     @GetMapping("/me")
     public ResponseEntity<ResponseDto> getMe() {
@@ -77,11 +82,12 @@ public class AuthController {
     }
 
     @Operation(
-            summary = "Log out to MDD",
-            description = "MDD application logout")
+            summary = "Logout from MDD",
+            description = "Logs out the user from the MDD application"
+    )
     @ApiResponses({
-            @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "400")
+            @ApiResponse(responseCode = "200", description = "Successfully logged out"),
+            @ApiResponse(responseCode = "400", description = "Logout failed due to invalid request")
     })
     @GetMapping("/logout")
     public void logout(){

@@ -26,10 +26,12 @@ public class ArticlesController {
 
     @Operation(
             summary = "Create an article",
-            description = "Returns an article object")
+            description = "Creates a new article and returns the article object")
     @ApiResponses({
-            @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ArticlesDto.class)))
+            @ApiResponse(responseCode = "200", description = "Article successfully created",
+                    content = {@Content(schema = @Schema(implementation = ResponseDto.class), mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", description = "Article not created",
+                    content = {@Content(schema = @Schema(implementation = ResponseDto.class), mediaType = "application/json")})
     })
     @PostMapping("")
     private ResponseEntity<ResponseDto> createArticle(@RequestBody ArticlesDto articleDto) {
@@ -46,10 +48,12 @@ public class ArticlesController {
 
     @Operation(
             summary = "Get all articles",
-            description = "Return all articles")
+            description = "Returns a list of all articles")
     @ApiResponses({
-            @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved articles",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = List.class))}),
+            @ApiResponse(responseCode = "400", description = "Error retrieving articles",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Exception.class))})
     })
     @GetMapping("")
     private ResponseEntity<ResponseDto> getAllArticles() {
@@ -61,10 +65,14 @@ public class ArticlesController {
 
     @Operation(
             summary = "Get an article by Id",
-            description = "Returns an article, the url contains the identifier")
+            description = "Returns the article details for the specified article ID")
     @ApiResponses({
-            @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved article",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDto.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid article ID",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Exception.class))}),
+            @ApiResponse(responseCode = "404", description = "Article not found",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Exception.class))})
     })
     @GetMapping("/{idArticle}")
     private ResponseEntity<ResponseDto> getArticle(@PathVariable int idArticle) {
@@ -76,10 +84,14 @@ public class ArticlesController {
 
     @Operation(
             summary = "Get all articles by topic id",
-            description = "Returns all articles that belong to a topic by passing the topic's iD in the url")
+            description = "Returns all articles that belong to a topic by passing the topic's ID in the URL")
     @ApiResponses({
-            @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved articles by topic",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDto.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid topic ID",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Exception.class))}),
+            @ApiResponse(responseCode = "404", description = "No articles found for the specified topic",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Exception.class))})
     })
     @GetMapping("/topic/{idTopic}")
     private ResponseEntity<ResponseDto> getArticlesByTopicId(@PathVariable int idTopic) {
@@ -94,16 +106,26 @@ public class ArticlesController {
 
     }
 
-
+    @Operation(
+            summary = "Delete an article by Id",
+            description = "Deletes the article with the specified ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Article successfully deleted",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDto.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid article ID",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Exception.class))}),
+            @ApiResponse(responseCode = "404", description = "Article not found",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Exception.class))})
+    })
     @DeleteMapping("/{idArticle}")
     public ResponseEntity<ResponseDto> deleteArticle(@PathVariable int idArticle) {
         ResponseDto responseDto = new ResponseDto();
         try {
-            responseDto.createResponse("success", "true");
+            responseDto.createResponse("Success", "true");
             articlesService.delete(idArticle);
             return ResponseEntity.ok(responseDto);
         } catch (Exception e) {
-            responseDto.createResponse("success", "false");
+            responseDto.createResponse("Success", "false");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseDto);
         }
     }

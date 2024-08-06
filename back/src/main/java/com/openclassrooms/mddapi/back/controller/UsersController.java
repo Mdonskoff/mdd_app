@@ -28,10 +28,12 @@ public class UsersController {
 
     @Operation(
             summary = "Get all articles by topics subscriptions",
-            description = "Returns all articles subscribed by the user")
+            description = "Returns all articles that the user is subscribed to based on their topic subscriptions")
     @ApiResponses({
-            @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved articles",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDto.class))}),
+            @ApiResponse(responseCode = "400", description = "Error retrieving articles",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Exception.class))})
     })
     @GetMapping("/articles")
     ResponseEntity<ResponseDto> getArticlesByTopicsSubscriptions() {
@@ -49,11 +51,13 @@ public class UsersController {
 
 
     @Operation(
-            summary = "Update the information of the user who is logged in ",
-            description = "Returns a new token to identify the user")
+            summary = "Update the information of the logged-in user",
+            description = "Updates user information and returns a new token for the user")
     @ApiResponses({
-            @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+            @ApiResponse(responseCode = "200", description = "User information updated successfully",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDto.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid input or error in update",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Exception.class))})
     })
     @PutMapping("/update")
     ResponseEntity<ResponseDto> updateUser(@RequestBody Users users) {
@@ -73,11 +77,13 @@ public class UsersController {
     }
 
     @Operation(
-            summary = "Update the topic subscription about user who is logged in",
-            description = "Send id topic in the URL for update the user subscription")
+            summary = "Update the topic subscription for the logged-in user",
+            description = "Updates the user's subscription to a topic by providing the topic ID in the URL")
     @ApiResponses({
-            @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+            @ApiResponse(responseCode = "200", description = "Subscription updated successfully",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDto.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid topic ID or error in subscription update",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Exception.class))})
     })
     @PostMapping("/topic/{idTopic}")
     ResponseEntity<ResponseDto> topicSubscription(@PathVariable int idTopic) {
@@ -87,11 +93,13 @@ public class UsersController {
     }
 
     @Operation(
-            summary = "Unsbuscribe a topic by the user",
-            description = "Send id topic in the URL for update the user subscription")
+            summary = "Unsubscribe from a topic",
+            description = "Unsubscribes the user from a topic by providing the topic ID in the URL")
     @ApiResponses({
-            @ApiResponse(responseCode = "200"),
-            @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = Exception.class)))
+            @ApiResponse(responseCode = "200", description = "Unsubscribed successfully",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDto.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid topic ID or error in unsubscription",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Exception.class))})
     })
     @DeleteMapping("/topic/{idTopic}")
     ResponseEntity<ResponseDto> topicUnsubscription(@PathVariable int idTopic) {
