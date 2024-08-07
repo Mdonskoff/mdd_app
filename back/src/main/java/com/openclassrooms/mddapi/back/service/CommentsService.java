@@ -28,6 +28,12 @@ public class CommentsService {
     @Autowired
     UsersRepository usersRepository;
 
+    /**
+     * Creates a new comment based on the provided CommentsDto.
+     *
+     * @param commentDto Data transfer object containing comment details.
+     * @return CommentsDto object representing the created comment, or null if validation fails.
+     */
     public CommentsDto createComment(CommentsDto commentDto) {
         if(commentDto.getComments() == null || commentDto.getIdArticle() == 0) {
             return null;
@@ -53,6 +59,13 @@ public class CommentsService {
         return convertCommentsToCommentsDto(comment, article.get().getId());
     }
 
+    /**
+     * Converts a Comments entity to a CommentsDto.
+     *
+     * @param comments The Comments entity to be converted.
+     * @param idArticle The ID of the article associated with the comment.
+     * @return CommentsDto object containing the mapped properties.
+     */
     private CommentsDto convertCommentsToCommentsDto(Comments comments, int idArticle) {
         CommentsDto commentsDto = new CommentsDto();
         commentsDto.setId(comments.getId());
@@ -63,6 +76,13 @@ public class CommentsService {
         return commentsDto;
     }
 
+    /**
+     * Converts a list of Comments entities to a list of CommentsDto.
+     *
+     * @param comments The list of Comments entities to be converted.
+     * @param idArticle The ID of the article associated with the comments.
+     * @return List of CommentsDto objects containing the mapped properties.
+     */
     public List<CommentsDto> convertListCommentsToListCommentsDto(List<Comments> comments, int idArticle) {
         List<CommentsDto> commentsDtoList = new ArrayList<>();
         for(Comments comment : comments) {

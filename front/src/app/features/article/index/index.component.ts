@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {mergeMap, Subscription, tap} from "rxjs";
+import {Subscription, tap} from "rxjs";
 import {ArticleItem} from "../interfaces/article-item.interface";
 import {User} from "../../../shared/interfaces/user.interface";
 import {ArticleService} from "../services/article.service";
@@ -27,7 +27,6 @@ export class IndexComponent implements OnInit, OnDestroy {
   ){}
 
   ngOnInit(): void {
-   //récupérer les articles de l'user
     this.article$ = this.userService.getArticles().pipe(
       tap(result => {
         this.articleItem = result.data.Articles
@@ -45,7 +44,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     }
   }
 
-  sortArticle(): void{ //fonction sort de JS
+  sortArticle(): void{
     if (this.articleItem && this.articleItem.length > 0) {
       if (this.sortArticleAsc){
         this.sortArticleAsc = !this.sortArticleAsc;

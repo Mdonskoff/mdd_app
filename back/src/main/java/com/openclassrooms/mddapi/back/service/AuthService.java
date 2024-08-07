@@ -37,6 +37,12 @@ public class AuthService {
     @Autowired
     private functionsUtils funUtils;
 
+    /**
+     * Creates a new user based on the provided RegisterDto.
+     *
+     * @param registerDto Data transfer object containing user registration details.
+     * @return true if the user is successfully created, false otherwise.
+     */
     public Boolean createUser(RegisterDto registerDto) {
         if(registerDto.getEmail() == null || registerDto.getPassword() == null || registerDto.getPseudo() == null) {
             log.error("Check users informations");
@@ -67,6 +73,12 @@ public class AuthService {
         return true;
     }
 
+    /**
+     * Logs in a user based on the provided LogInDto.
+     *
+     * @param logInDto Data transfer object containing login details.
+     * @return JWT token if login is successful, otherwise an error message.
+     */
     public String logIn(LogInDto logInDto) {
         if(logInDto.getId() == null || logInDto.getPassword() == null) {
             return "login/password incorrect";
@@ -90,6 +102,13 @@ public class AuthService {
         }
 
     }
+
+    /**
+     * Retrieves information about the currently logged-in user.
+     *
+     * @return UsersDto object containing information about the logged-in user,
+     *         or null if no user is found with the authenticated email.
+     */
     public UsersDto getMyInfo(){
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<Users> user = usersRepository.findByEmail(email);
@@ -107,6 +126,10 @@ public class AuthService {
         return usersDto;
     }
 
+    /**
+     * Clears the SecurityContext to remove authentication and authorization information..
+     *
+     */
     public void logout() {
         SecurityContextHolder.clearContext();
     }

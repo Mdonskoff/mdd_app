@@ -5,7 +5,6 @@ import {ArticleService} from "../services/article.service";
 import {mergeMap, Subscription, tap} from "rxjs";
 import {Topic} from "../../../shared/interfaces/topic.interface";
 
-//Aller sur un article
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
@@ -22,17 +21,14 @@ export class ArticleComponent implements OnInit, OnDestroy {
     private articleService : ArticleService,
   ){}
 
-
+//Consult an article
   ngOnInit(): void {
     this.articleItem$ = this.route.queryParams.pipe(
       mergeMap(param => {
-        console.log(param['id'])
         return this.articleService.getArticleById(param['id']);
       }),
       tap(result => {
         this.articleItem = result.data.article;
-        console.log(this.topic)
-        console.log(result)
         this.topic.id = result.data.article.idTopic!.toString()
         this.topic.label = result.data.article.labelTopic!
       })

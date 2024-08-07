@@ -5,7 +5,6 @@ import {Login} from "../Interfaces/login.interface";
 import {LoginService} from "../services/login.service";
 import {Router} from "@angular/router";
 import {AuthService} from "../../../shared/services/auth.service";
-import {UserService} from "../../../shared/services/user.service";
 
 @Component({
   selector: 'app-login',
@@ -24,8 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private loginService: LoginService,
     private router : Router,
-    private authService : AuthService,
-    private userService: UserService
+    private authService : AuthService
   ) { }
 
   ngOnInit(): void {

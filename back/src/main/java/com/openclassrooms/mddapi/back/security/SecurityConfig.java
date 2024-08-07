@@ -52,7 +52,6 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .allowCredentials(true);
     }
 
-    //URL authorisations pour la documentation
     private static final String[] AUTH_WHITELIST = {
             "/v3/api-docs/**",
             "/v3/api-doc.yaml",

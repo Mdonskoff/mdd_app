@@ -38,17 +38,14 @@ public class ArticlesService {
      * @return the created article as a DTO, or null if validation or persistence fails.
      */
     public ArticlesDto createArticle(ArticlesDto articleDto) {
-        // Validate the input DTO
         if (articleDto.getTitle() == null || articleDto.getContents() == null || articleDto.getIdTopic() == 0) {
             return null;
         }
         try {
-            // Check if the topic exists
             Optional<Topics> topicOptional = topicsRepository.findById(articleDto.getIdTopic());
             if (topicOptional.isEmpty()) {
                 return null;
             }
-            // Create and populate a new article entity
             Topics topic = topicOptional.get();
             Articles article = new Articles();
             article.setTitle(articleDto.getTitle());
@@ -57,12 +54,10 @@ public class ArticlesService {
             article.setTopics(topic);
             article.setDate(new Date());
 
-            // Set the user from the security context
             String email = SecurityContextHolder.getContext().getAuthentication().getName();
             Users user = usersRepository.findByEmail(email).get();
             article.setUser(user);
 
-            // Save the article and return its DTO representation
             return convertArticlesToArticlesDto(articlesRepository.save(article));
         } catch (Exception e) {
             return null;
@@ -111,7 +106,6 @@ public class ArticlesService {
         for (Articles article : articles) {
             allArticlesList.add(convertArticlesToArticlesDto(article));
         }
-        //Collections.reverse(allArticlesList);
         allArticlesList.sort(Comparator.comparing(ArticlesDto::getDate).reversed());
         return allArticlesList;
     }

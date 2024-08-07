@@ -10,10 +10,10 @@ This project is developed in Java version 17 with Spring Boot.
 ## Build
 
 Open the back folder with your IDE.
-Connect to MySql Workbench for example, create a database and Import the Database.sql file currently in the folder.
-Execute the SQL script to create the tables and data.
+Connect to MySql Workbench for example, create a database and if needed, import the Database.sql file currently in the folder.
+Execute the SQL script to create the tables and datas.
 
-To avoid displaying sensitive data, create a .env file in the back folder. 
+To avoid displaying sensitive datas, create a .env file in the back folder. 
 
 In the .env file, adapt the DATABASE_USERNAME and DATABASE_PASSWORD variables (as shown in the application.properties file). 
 

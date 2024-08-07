@@ -13,7 +13,6 @@ export class ArticleListComponent {
 
   constructor(private router: Router){}
 
-  //route en lien avec article.component.ts
   onClick(): void {
     this.router.navigate(['/article/article'], {queryParams : {id : this.articleItem?.id}});
   }

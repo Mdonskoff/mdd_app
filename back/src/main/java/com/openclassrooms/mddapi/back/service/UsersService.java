@@ -129,8 +129,9 @@ public class UsersService {
     }
 
     /**
-     * Get articles from topics subscribed by the user.
-     * @return
+     * Retrieves a list of articles based on the user's topics subscriptions.
+     *
+     * @return List of ArticlesDto objects corresponding to the user's subscribed topics.
      */
     public List<ArticlesDto> getArticlesByTopicsSubscriptions() {
 

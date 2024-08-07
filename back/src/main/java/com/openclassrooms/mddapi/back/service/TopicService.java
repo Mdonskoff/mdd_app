@@ -17,14 +17,13 @@ public class TopicService {
 
     /**
      * Retrieves all topics.
-     *
+     * Convert each topic entity to a DTO and add to the list
      * @return a list of all topic DTOs.
      */
     public List<TopicsDto> getAll() {
         List<Topics> topicsList = topicsRepository.findAll();
         List<TopicsDto> topicsDtoList = new ArrayList<>();
 
-        // Convert each topic entity to a DTO and add to the list
         for (Topics topic : topicsList) {
             TopicsDto newTopicsDto = convertTopicsToTopicsDto(topic);
             topicsDtoList.add(newTopicsDto);
@@ -39,16 +38,13 @@ public class TopicService {
      * @return the created topic as a DTO, or null if validation or persistence fails.
      */
     public TopicsDto createTopic(TopicsDto topic) {
-        // Validate the input DTO
         if (topic.getLabel().isEmpty()) {
             return null;
         }
-        // Check if the topic label already exists
         Topics checkTopic = topicsRepository.findByLabel(topic.getLabel());
         if (checkTopic != null) {
             return null;
         }
-        // Convert the DTO to an entity, save it, and return the saved entity as a DTO
         checkTopic = convertTopicsDtoToTopics(topic);
         return convertTopicsToTopicsDto(topicsRepository.save(checkTopic));
 

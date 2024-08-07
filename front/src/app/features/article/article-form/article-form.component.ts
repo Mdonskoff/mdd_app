@@ -39,7 +39,6 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
     this.topic$ = this.topicService.getTopics().pipe(
       tap(tabTopics => {
         this.topic = tabTopics.data.Topics
-        console.log(tabTopics)
       })
     ).subscribe();
 
